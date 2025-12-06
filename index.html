@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="refresh" content="0; url=https://www.instagram.com/reel/DR4VjlQjAfF/" />
   <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // The URL you want to redirect to (change this anytime)
+    const destination = "https://www.instagram.com/reel/DR4VjlQjAfF/";
+    
+    // Try to open the Instagram app first
+    const appLink = destination.replace("https://www.instagram.com", "instagram://");
+    const start = Date.now();
+    window.location = appLink;
+
+    // Fallback to the website if the app isn't installed
+    setTimeout(() => {
+      if (Date.now() - start < 700) window.location = destination;
+    }, 500);
+  </script>
 </head>
 <body>
   <p>If you are not redirected automatically, 
-     <a href="https://www.instagram.com/reel/DR4VjlQjAfF/">click here</a>.
+     <a id="fallback" href="#">click here</a>.
   </p>
+  <script>
+    // Set the fallback link dynamically
+    document.getElementById("fallback").href = destination;
+  </script>
 </body>
 </html>
