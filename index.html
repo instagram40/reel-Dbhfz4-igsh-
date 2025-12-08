@@ -3,31 +3,61 @@
 <head>
   <title>Open Instagram Reel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
-    (function() {
-      // The URL you can update anytime without touching your Instagram bio
-      const destination = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
-
-      // App deep link
-      const appLink = destination.replace("https://www.instagram.com", "instagram://");
-
-      const start = Date.now();
-
-      // Try opening Instagram app first
-      window.location = appLink;
-
-      // Fallback to website if the app fails to open
-      setTimeout(() => {
-        if (Date.now() - start < 700) window.location = destination;
-      }, 500);
-    })();
-  </script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fafafa;
+    }
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      max-width: 400px;
+      height: 60px;
+      background: #000;
+      color: #fff;
+      font-size: 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+    }
+    .btn:active {
+      background: #222;
+    }
+  </style>
 </head>
 <body>
-  <p>If the reel doesn’t open automatically, <a id="fallback" href="#">click here</a>.</p>
-  <script>
-    // Update the fallback link dynamically
-    document.getElementById("fallback").href = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
-  </script>
+
+<a id="openBtn" class="btn" href="instagram://reel/DR93s0EjKl6">
+  Open Instagram Reel
+</a>
+
+<script>
+  const reelUrl = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
+  const openBtn = document.getElementById('openBtn');
+
+  openBtn.addEventListener('click', () => {
+    const start = Date.now();
+
+    // Try opening Instagram app
+    window.location = "instagram://reel/DR93s0EjKl6";
+
+    // Fallback to browser after 1s if app doesn't open
+    setTimeout(() => {
+      if (Date.now() - start < 1500) {
+        window.location = reelUrl;
+      }
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
