@@ -4,59 +4,51 @@
   <title>Open Instagram Reel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fafafa;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align:center; padding-top:50px; }
     .btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80%;
-      max-width: 400px;
-      height: 60px;
-      background: #000;
-      color: #fff;
-      font-size: 22px;
-      border-radius: 12px;
+      display: inline-block;
+      padding: 14px 24px;
+      font-size: 20px;
+      background: black;
+      color: white;
+      border-radius: 10px;
       text-decoration: none;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s;
-    }
-    .btn:active {
-      background: #222;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-<a id="openBtn" class="btn" href="instagram://reel/DR93s0EjKl6">
-  Open Instagram Reel
+<p>Opening Instagram Reel...</p>
+
+<a id="fallback" class="btn" href="https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==">
+  If nothing happens, click here
 </a>
 
 <script>
-  const reelUrl = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
-  const openBtn = document.getElementById('openBtn');
+(function() {
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const android = /Android/.test(navigator.userAgent);
+    const reelUrl = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
+    const appUrl = "instagram://reel/DR93s0EjKl6";
 
-  openBtn.addEventListener('click', () => {
     const start = Date.now();
 
-    // Try opening Instagram app
-    window.location = "instagram://reel/DR93s0EjKl6";
+    if (android) {
+        // Auto open Instagram app on Android
+        window.location = appUrl;
+    } else if (ios) {
+        // iOS: show message and button (tap required)
+        document.body.querySelector('p').innerText = "Tap the button to open the Instagram app:";
+    }
 
-    // Fallback to browser after 1s if app doesn't open
+    // Fallback to browser if app doesn't open after 1s
     setTimeout(() => {
-      if (Date.now() - start < 1500) {
-        window.location = reelUrl;
-      }
+        if (Date.now() - start < 1500) {
+            window.location = reelUrl;
+        }
     }, 1000);
-  });
+})();
 </script>
 
 </body>
