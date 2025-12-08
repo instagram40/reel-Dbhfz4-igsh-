@@ -3,53 +3,31 @@
 <head>
   <title>Open Instagram Reel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align:center; padding-top:50px; }
-    .btn {
-      display: inline-block;
-      padding: 14px 24px;
-      font-size: 20px;
-      background: black;
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
-      margin-top: 20px;
-    }
-  </style>
+  <script>
+    (function() {
+      // The URL you can update anytime without touching your Instagram bio
+      const destination = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
+
+      // App deep link
+      const appLink = destination.replace("https://www.instagram.com", "instagram://");
+
+      const start = Date.now();
+
+      // Try opening Instagram app first
+      window.location = appLink;
+
+      // Fallback to website if the app fails to open
+      setTimeout(() => {
+        if (Date.now() - start < 700) window.location = destination;
+      }, 500);
+    })();
+  </script>
 </head>
 <body>
-
-<p>Opening Instagram Reel...</p>
-
-<a id="fallback" class="btn" href="https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==">
-  If nothing happens, click here
-</a>
-
-<script>
-(function() {
-    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const android = /Android/.test(navigator.userAgent);
-    const reelUrl = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
-    const appUrl = "instagram://reel/DR93s0EjKl6";
-
-    const start = Date.now();
-
-    if (android) {
-        // Auto open Instagram app on Android
-        window.location = appUrl;
-    } else if (ios) {
-        // iOS: show message and button (tap required)
-        document.body.querySelector('p').innerText = "Tap the button to open the Instagram app:";
-    }
-
-    // Fallback to browser if app doesn't open after 1s
-    setTimeout(() => {
-        if (Date.now() - start < 1500) {
-            window.location = reelUrl;
-        }
-    }, 1000);
-})();
-</script>
-
+  <p>If the reel doesn’t open automatically, <a id="fallback" href="#">click here</a>.</p>
+  <script>
+    // Update the fallback link dynamically
+    document.getElementById("fallback").href = "https://www.instagram.com/reel/DR93s0EjKl6/?igsh=MXdjODJkNGdpaTB0dg==";
+  </script>
 </body>
 </html>
