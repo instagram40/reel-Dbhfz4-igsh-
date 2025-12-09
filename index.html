@@ -6,21 +6,8 @@
 
   <script>
     (function() {
-      // Browser link for fallback
-      const browserURL =
-        "https://www.instagram.com/reel/DQmtz35jF4w/?igsh=dDlsbzJtd2dxOHpl";
-
-      // Deep link to open Instagram app directly
-      const appURL =
-        "instagram://reel?id=DQmtz35jF4w";
-
-      // Try to open in Instagram app first
-      window.location = appURL;
-
-      // If the app does not open, fallback to browser
-      setTimeout(() => {
-        window.location = browserURL;
-      }, 1000);
+      // Open instantly (0 seconds)
+      window.location = "https://www.instagram.com/reel/DQmtz35jF4w/?igsh=dDlsbzJtd2dxOHpl";
     })();
   </script>
 
