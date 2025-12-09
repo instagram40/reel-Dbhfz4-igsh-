@@ -3,17 +3,33 @@
 <head>
   <title>Open Instagram Reel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <script>
     (function() {
-      // Browser URL of the reel
-      const destination = "https://www.instagram.com/stories/ali_m_shafiq/3783423145508239935?utm_source=ig_story_item_share&igsh=MWNqbzRwaGhhZTl6dQ==";
-      
-      // Open instantly
-      window.location = destination;
+      // Browser link for fallback
+      const browserURL =
+        "https://www.instagram.com/reel/DQmtz35jF4w/?igsh=dDlsbzJtd2dxOHpl";
+
+      // Deep link to open Instagram app directly
+      const appURL =
+        "instagram://reel?id=DQmtz35jF4w";
+
+      // Try to open in Instagram app first
+      window.location = appURL;
+
+      // If the app does not open, fallback to browser
+      setTimeout(() => {
+        window.location = browserURL;
+      }, 1000);
     })();
   </script>
+
 </head>
 <body>
-  <p>If the reel doesn’t open automatically, <a href="https://www.instagram.com/stories/ali_m_shafiq/3783423145508239935?utm_source=ig_story_item_share&igsh=MWNqbzRwaGhhZTl6dQ==">click here</a>.</p>
+  <p>If it doesn’t open automatically, 
+     <a href="https://www.instagram.com/reel/DQmtz35jF4w/?igsh=dDlsbzJtd2dxOHpl">
+       click here
+     </a>.
+  </p>
 </body>
 </html>
